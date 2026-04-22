@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { GeoCombobox } from '@/components/GeoCombobox';
 import { Button } from '@/components/ui';
 import type { GeoEntity } from '@/types';
+import styles from './SearchForm.module.css';
 
 interface SearchFormProps {
   onSubmit: (item: GeoEntity) => void;
@@ -19,19 +20,19 @@ export function SearchForm({ onSubmit, isDisabled = false }: SearchFormProps) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex items-center gap-3 w-full max-w-2xl rounded-2xl bg-white border border-gray-200 shadow-sm p-2"
-    >
-      <GeoCombobox
-        value={selectedItem}
-        onChange={setSelectedItem}
-        placeholder="Країна, місто або готель"
-        disabled={isDisabled}
-      />
-      <Button type="submit" disabled={isDisabled} className="shrink-0">
-        Знайти
-      </Button>
-    </form>
+    <div className={styles.card}>
+      <h2 className={styles.title}>Форма пошуку турів</h2>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <GeoCombobox
+          value={selectedItem}
+          onChange={setSelectedItem}
+          placeholder="Країна, місто або готель"
+          disabled={isDisabled}
+        />
+        <Button type="submit" disabled={isDisabled} className={styles.submitButton}>
+          Знайти
+        </Button>
+      </form>
+    </div>
   );
 }

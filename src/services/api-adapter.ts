@@ -39,7 +39,7 @@ interface ApiModule {
 }
 
 // _api/api.js is a plain JS mock — DO NOT modify
-// @ts-ignore
+// @ts-expect-error — api.js has no type declarations
 import * as _api from '../../_api/api.js';
 const api = _api as ApiModule;
 

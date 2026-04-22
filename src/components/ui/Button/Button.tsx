@@ -1,5 +1,6 @@
 import { cn } from '@/lib/cn';
 import { Spinner } from '@/components/ui/Spinner/Spinner';
+import styles from './Button.module.css';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -25,15 +26,9 @@ export function Button({
       type={type}
       onClick={onClick}
       disabled={isDisabled}
-      className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5',
-        'bg-blue-600 text-white text-sm font-medium',
-        'hover:bg-blue-700 transition-colors',
-        'disabled:opacity-50 disabled:pointer-events-none',
-        className,
-      )}
+      className={cn(styles.button, className)}
     >
-      {loading && <Spinner size="sm" className="border-white/30 border-t-white" />}
+      {loading && <Spinner size="sm" className={styles.spinnerColor} />}
       {children}
     </button>
   );

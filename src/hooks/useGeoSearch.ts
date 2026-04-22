@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { getCountries, searchGeo } from '@/service/api';
+import { getCountries, searchGeo } from '@/services/api-adapter';
 import type { GeoEntity } from '@/types';
 
 interface UseGeoSearchResult {
@@ -16,7 +16,6 @@ export function useGeoSearch(
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Keep selectedItem accessible inside effect without triggering re-runs
   const selectedItemRef = useRef(selectedItem);
   useEffect(() => {
     selectedItemRef.current = selectedItem;
@@ -26,7 +25,6 @@ export function useGeoSearch(
     let cancelled = false;
 
     if (inputValue === '') {
-      // City/hotel selected and input cleared — stay empty, don't show countries
       const current = selectedItemRef.current;
       if (current !== null && current.type !== 'country') {
         setItems([]);
@@ -55,9 +53,9 @@ export function useGeoSearch(
       };
     }
 
-    setError(null);
     const timer = setTimeout(() => {
       setIsLoading(true);
+      setError(null);
       searchGeo(inputValue)
         .then((entities) => {
           if (!cancelled) {
