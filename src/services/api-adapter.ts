@@ -43,29 +43,37 @@ interface ApiModule {
 import * as _api from '../../_api/api.js';
 const api = _api as ApiModule;
 
-function parse<T>(res: Response): Promise<T> {
+async function callApi<T>(promise: Promise<Response>): Promise<T> {
+  let res: Response;
+  try {
+    res = await promise;
+  } catch (err) {
+    if (err instanceof Response) {
+      const body = (await err.json()) as ErrorResponse;
+      throw body;
+    }
+    throw err;
+  }
   return res.json() as Promise<T>;
 }
 
 type RawCountry = Omit<Country, 'type'>;
 
 export const getCountries = (): Promise<Country[]> =>
-  api.getCountries().then((res) =>
-    parse<Record<string, RawCountry>>(res).then((map) =>
-      Object.values(map).map((c) => ({ ...c, type: 'country' as const }))
-    )
+  callApi<Record<string, RawCountry>>(api.getCountries()).then((map) =>
+    Object.values(map).map((c) => ({ ...c, type: 'country' as const })),
   );
 
 export const searchGeo = (query?: string): Promise<GeoEntity[]> =>
-  api.searchGeo(query).then((res) =>
-    parse<Record<string, GeoEntity>>(res).then((map) => Object.values(map))
+  callApi<Record<string, GeoEntity>>(api.searchGeo(query)).then((map) =>
+    Object.values(map),
   );
 
 export const startSearchPrices = (countryID: string): Promise<StartSearchResponse> =>
-  api.startSearchPrices(countryID).then((res) => parse<StartSearchResponse>(res));
+  callApi<StartSearchResponse>(api.startSearchPrices(countryID));
 
 export const getSearchPrices = (token: string): Promise<GetSearchPricesResponse> =>
-  api.getSearchPrices(token).then((res) => parse<GetSearchPricesResponse>(res));
+  callApi<GetSearchPricesResponse>(api.getSearchPrices(token));
 
 export const stopSearchPrices = (token: string): Promise<StopSearchResponse> =>
-  api.stopSearchPrices(token).then((res) => parse<StopSearchResponse>(res));
+  callApi<StopSearchResponse>(api.stopSearchPrices(token));

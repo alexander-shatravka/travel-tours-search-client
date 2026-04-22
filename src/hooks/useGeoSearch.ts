@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { getCountries, searchGeo } from '@/services/api-adapter';
+import { getCountries, searchGeo } from '@/services';
+import { useDebounce } from './useDebounce';
 import type { GeoEntity } from '@/types';
 
 interface UseGeoSearchResult {
@@ -16,6 +17,8 @@ export function useGeoSearch(
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const debouncedInput = useDebounce(inputValue, 300);
+
   const selectedItemRef = useRef(selectedItem);
   useEffect(() => {
     selectedItemRef.current = selectedItem;
@@ -24,7 +27,7 @@ export function useGeoSearch(
   useEffect(() => {
     let cancelled = false;
 
-    if (inputValue === '') {
+    if (debouncedInput === '') {
       const current = selectedItemRef.current;
       if (current !== null && current.type !== 'country') {
         setItems([]);
@@ -53,29 +56,27 @@ export function useGeoSearch(
       };
     }
 
-    const timer = setTimeout(() => {
-      setIsLoading(true);
-      setError(null);
-      searchGeo(inputValue)
-        .then((entities) => {
-          if (!cancelled) {
-            setItems(entities);
-            setIsLoading(false);
-          }
-        })
-        .catch(() => {
-          if (!cancelled) {
-            setError('Помилка пошуку');
-            setIsLoading(false);
-          }
-        });
-    }, 300);
+    setIsLoading(true);
+    setError(null);
+    searchGeo(debouncedInput)
+      .then((entities) => {
+        if (!cancelled) {
+          const query = debouncedInput.toLowerCase();
+          setItems(entities.filter((e) => e.name.toLowerCase().includes(query)));
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setError('Помилка пошуку');
+          setIsLoading(false);
+        }
+      });
 
     return () => {
       cancelled = true;
-      clearTimeout(timer);
     };
-  }, [inputValue]);
+  }, [debouncedInput]);
 
   return { items, isLoading, error };
 }

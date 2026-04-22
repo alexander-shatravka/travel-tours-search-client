@@ -10,12 +10,14 @@ export interface Country {
 export interface City {
   id: number;
   name: string;
+  countryId: string;
   type: 'city';
 }
 
 export interface GeoHotel {
   id: number;
   name: string;
+  countryId: string;
   type: 'hotel';
 }
 
@@ -23,9 +25,11 @@ export type GeoEntity = Country | City | GeoHotel;
 export type GeoMap = Record<string, GeoEntity>;
 export type CountriesMap = Record<string, Country>;
 
-export type SearchStatus = 'idle' | 'searching' | 'error';
-
-export interface SearchState {
-  status: SearchStatus;
-  error: string | null;
-}
+export type SearchStatus =
+  | 'idle'
+  | 'searching'
+  | 'polling'
+  | 'success'
+  | 'empty'
+  | 'error'
+  | 'cancelling';

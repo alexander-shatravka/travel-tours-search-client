@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useGeoSearch } from '@/hooks/useGeoSearch';
+import { useGeoSearch } from '@/hooks';
 import { Spinner } from '@/components/ui/Spinner/Spinner';
 import { GeoEntityIcon } from './GeoEntityIcon';
 import { cn } from '@/lib/cn';
