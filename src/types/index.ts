@@ -1,35 +1,24 @@
-export type GeoType = 'country' | 'city' | 'hotel';
+import { GeoType } from '@/constants';
 
 export interface Country {
   id: string;
   name: string;
   flag: string;
-  type: 'country';
+  type: typeof GeoType.Country;
 }
 
 export interface City {
   id: number;
   name: string;
   countryId: string;
-  type: 'city';
+  type: typeof GeoType.City;
 }
 
 export interface GeoHotel {
   id: number;
   name: string;
   countryId: string;
-  type: 'hotel';
+  type: typeof GeoType.Hotel;
 }
 
 export type GeoEntity = Country | City | GeoHotel;
-export type GeoMap = Record<string, GeoEntity>;
-export type CountriesMap = Record<string, Country>;
-
-export type SearchStatus =
-  | 'idle'
-  | 'searching'
-  | 'polling'
-  | 'success'
-  | 'empty'
-  | 'error'
-  | 'cancelling';

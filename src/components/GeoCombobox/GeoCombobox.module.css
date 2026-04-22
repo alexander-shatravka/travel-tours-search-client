@@ -9,9 +9,12 @@
 }
 
 .input {
-  @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-3text-sm text-gray-900
-  placeholder:text-gray-400outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20
-  disabled:bg-gray-50 disabled:text-gray-400transition-colors;
+  @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-3
+    text-sm text-gray-900
+    placeholder:text-gray-400
+    outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20
+    disabled:bg-gray-50 disabled:text-gray-400
+    transition-colors;
 }
 
 .inputWithClear {
@@ -19,8 +22,8 @@
 }
 
 .clearButton {
-  @apply absolute right-3 top-1/2 -translate-y-1/2text-gray-400
-  hover:text-gray-600 transition-colors leading-none;
+  @apply absolute right-3 top-1/2 -translate-y-1/2
+    text-gray-400 hover:text-gray-600 transition-colors leading-none;
 }
 
 .dropdown {
@@ -37,7 +40,7 @@
 
 .item {
   @apply flex items-center gap-3 px-4 py-3 cursor-pointer select-none
-  text-sm transition-colors;
+    text-sm transition-colors;
 }
 
 .itemDefault {

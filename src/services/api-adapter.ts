@@ -1,9 +1,10 @@
+import { GeoType, Currency } from '@/constants';
 import type { Country, GeoEntity } from '@/types';
 
 export interface PriceOffer {
   id: string;
   amount: number;
-  currency: 'usd';
+  currency: Currency;
   startDate: string;
   endDate: string;
   hotelID?: string;
@@ -61,7 +62,7 @@ type RawCountry = Omit<Country, 'type'>;
 
 export const getCountries = (): Promise<Country[]> =>
   callApi<Record<string, RawCountry>>(api.getCountries()).then((map) =>
-    Object.values(map).map((c) => ({ ...c, type: 'country' as const })),
+    Object.values(map).map((c) => ({ ...c, type: GeoType.Country })),
   );
 
 export const searchGeo = (query?: string): Promise<GeoEntity[]> =>

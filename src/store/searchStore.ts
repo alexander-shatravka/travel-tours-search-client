@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import type { GeoEntity, SearchStatus } from '@/types';
+import { SearchStatus } from '@/constants';
+import type { GeoEntity } from '@/types';
 import type { PriceOffer } from '@/services/api-adapter';
 
 interface SearchStore {
@@ -19,7 +20,7 @@ interface SearchStore {
 }
 
 const initialState = {
-  status: 'idle' as SearchStatus,
+  status: SearchStatus.Idle as SearchStatus,
   selectedItem: null as GeoEntity | null,
   token: null as string | null,
   prices: {} as Record<string, PriceOffer>,
@@ -33,18 +34,18 @@ export const useSearchStore = create<SearchStore>()(
 
       startSearch: (item) =>
         set(
-          { status: 'searching' as SearchStatus, selectedItem: item, token: null, prices: {}, error: null },
+          { status: SearchStatus.Searching as SearchStatus, selectedItem: item, token: null, prices: {}, error: null },
           false,
           'startSearch',
         ),
 
       setPolling: (token) =>
-        set({ status: 'polling' as SearchStatus, token }, false, 'setPolling'),
+        set({ status: SearchStatus.Polling as SearchStatus, token }, false, 'setPolling'),
 
       setSuccess: (prices) =>
         set(
           {
-            status: (Object.keys(prices).length > 0 ? 'success' : 'empty') as SearchStatus,
+            status: (Object.keys(prices).length > 0 ? SearchStatus.Success : SearchStatus.Empty) as SearchStatus,
             prices,
           },
           false,
@@ -52,10 +53,10 @@ export const useSearchStore = create<SearchStore>()(
         ),
 
       setError: (message) =>
-        set({ status: 'error' as SearchStatus, error: message }, false, 'setError'),
+        set({ status: SearchStatus.Error as SearchStatus, error: message }, false, 'setError'),
 
       setCancelling: () =>
-        set({ status: 'cancelling' as SearchStatus }, false, 'setCancelling'),
+        set({ status: SearchStatus.Cancelling as SearchStatus }, false, 'setCancelling'),
 
       reset: () =>
         set(initialState, false, 'reset'),

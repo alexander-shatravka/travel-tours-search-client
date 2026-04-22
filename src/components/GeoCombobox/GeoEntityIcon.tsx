@@ -1,4 +1,4 @@
-import type { GeoType } from '@/types';
+import { GeoType } from '@/constants';
 
 interface GeoEntityIconProps {
   type: GeoType;
@@ -6,7 +6,7 @@ interface GeoEntityIconProps {
 }
 
 export function GeoEntityIcon({ type, className }: GeoEntityIconProps) {
-  if (type === 'city') {
+  if (type === GeoType.City) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -3,6 +3,7 @@ import { useGeoSearch } from '@/hooks';
 import { Spinner } from '@/components/ui/Spinner/Spinner';
 import { GeoEntityIcon } from './GeoEntityIcon';
 import { cn } from '@/lib/cn';
+import { GeoType } from '@/constants';
 import type { GeoEntity } from '@/types';
 import styles from './GeoCombobox.module.css';
 
@@ -23,7 +24,7 @@ export function GeoCombobox({ value, onChange, placeholder, disabled }: GeoCombo
 
   const handleFocus = () => {
     setIsOpen(true);
-    if (value?.type === 'country') {
+    if (value?.type === GeoType.Country) {
       setInputValue('');
     }
   };
@@ -145,7 +146,7 @@ export function GeoCombobox({ value, onChange, placeholder, disabled }: GeoCombo
                   index === focusedIndex ? styles.itemFocused : styles.itemDefault,
                 )}
               >
-                {item.type === 'country' ? (
+                {item.type === GeoType.Country ? (
                   <img src={item.flag} alt="" className={styles.flag} />
                 ) : (
                   <GeoEntityIcon type={item.type} className={styles.icon} />
