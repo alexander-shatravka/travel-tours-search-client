@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { SearchPage } from '@/pages/SearchPage';
+import { SearchPage } from '@/pages/SearchPage/SearchPage';
 
 export function AppRouter() {
   return (

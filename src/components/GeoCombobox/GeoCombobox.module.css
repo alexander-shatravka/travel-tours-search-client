@@ -1,0 +1,64 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply w-full;
+}
+
+.inputWrapper {
+  @apply relative;
+}
+
+.input {
+  @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-3
+    text-sm text-gray-900
+    placeholder:text-gray-400
+    outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20
+    disabled:bg-gray-50 disabled:text-gray-400
+    transition-colors;
+}
+
+.inputWithClear {
+  @apply pr-10;
+}
+
+.clearButton {
+  @apply absolute right-3 top-1/2 -translate-y-1/2
+    text-gray-400 hover:text-gray-600 transition-colors leading-none;
+}
+
+.dropdown {
+  @apply mt-1 w-full rounded-lg border border-gray-200 bg-white overflow-y-auto max-h-72;
+}
+
+.loadingItem {
+  @apply flex justify-center py-6;
+}
+
+.emptyItem {
+  @apply px-4 py-3 text-sm text-gray-400 text-center;
+}
+
+.item {
+  @apply flex items-center gap-3 px-4 py-3 cursor-pointer select-none
+    text-sm transition-colors;
+}
+
+.itemDefault {
+  @apply text-gray-800 hover:bg-gray-50;
+}
+
+.itemFocused {
+  @apply bg-blue-50 text-blue-900;
+}
+
+.flag {
+  @apply w-6 h-4 object-cover rounded-sm shrink-0;
+}
+
+.icon {
+  @apply w-5 h-5 shrink-0 text-gray-500;
+}
+
+.itemText {
+  @apply truncate;
+}
