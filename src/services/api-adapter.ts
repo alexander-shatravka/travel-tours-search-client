@@ -1,4 +1,5 @@
-import { GeoType, Currency } from '@/constants';
+import { GeoType } from '@/constants/geo';
+import { Currency } from '@/constants/currency';
 import type { Country, GeoEntity } from '@/types';
 
 export interface PriceOffer {

@@ -1,4 +1,4 @@
-import { GeoType } from '@/constants';
+import { GeoType } from '@/constants/geo';
 
 export interface Country {
   id: string;

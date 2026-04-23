@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { GeoCombobox } from '@/components/GeoCombobox';
-import { Button } from '@/components/ui';
+import { GeoCombobox } from '@/components/GeoCombobox/GeoCombobox';
+import { Button } from '@/components/ui/Button/Button';
 import type { GeoEntity } from '@/types';
 import styles from './SearchForm.module.css';
 

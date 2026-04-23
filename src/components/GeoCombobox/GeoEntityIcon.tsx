@@ -1,4 +1,4 @@
-import { GeoType } from '@/constants';
+import { GeoType } from '@/constants/geo';
 
 interface GeoEntityIconProps {
   type: GeoType;

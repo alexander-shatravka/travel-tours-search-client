@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useRef } from 'react';
-import { getCountries, searchGeo } from '@/services';
-import { useDebounce } from './useDebounce';
-import { GeoType } from '@/constants';
+import { getCountries, searchGeo } from '@/services/api-adapter';
+import { useDebounce } from '@/hooks/useDebounce';
+import { GeoType } from '@/constants/geo';
 import type { GeoEntity } from '@/types';
 
 interface UseGeoSearchResult {

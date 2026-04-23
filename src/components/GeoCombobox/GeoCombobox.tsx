@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import { useGeoSearch } from '@/hooks';
+import { useGeoSearch } from '@/hooks/useGeoSearch';
 import { Spinner } from '@/components/ui/Spinner/Spinner';
 import { GeoEntityIcon } from './GeoEntityIcon';
 import { cn } from '@/lib/cn';
-import { GeoType } from '@/constants';
+import { GeoType } from '@/constants/geo';
 import type { GeoEntity } from '@/types';
 import styles from './GeoCombobox.module.css';
 

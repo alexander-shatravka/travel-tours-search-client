@@ -1,6 +1,6 @@
-import { SearchForm } from '@/components/SearchForm';
-import { useSearchStore } from '@/store';
-import { SearchStatus } from '@/constants';
+import { SearchForm } from '@/components/SearchForm/SearchForm';
+import { useSearchStore } from '@/store/searchStore';
+import { SearchStatus } from '@/constants/search';
 
 export function SearchPage() {
   const startSearch = useSearchStore((s) => s.startSearch);

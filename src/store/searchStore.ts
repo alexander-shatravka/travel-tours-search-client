@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { SearchStatus } from '@/constants';
+import { SearchStatus } from '@/constants/search';
 import type { GeoEntity } from '@/types';
 import type { PriceOffer } from '@/services/api-adapter';
 
